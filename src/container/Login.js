@@ -2,10 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Alert, Platform, AsyncStorage } from 'react-native';
 import { login } from "../actions/login";
-import Validator from "../../validator";
-import Login from "../components/Login";
-import * as wordConstants from '../constants/WordConstants';
-import firebase from 'react-native-firebase'
+import Validator from "../validator";
+import Login from "../components/Login/Login";
+
 //import DeviceInfo from 'react-native-device-info';
 
 class LoginContainer extends React.PureComponent {
@@ -31,7 +30,7 @@ class LoginContainer extends React.PureComponent {
 
   componentDidMount() {
 
-    this.checkPermission();
+    //this.checkPermission();
   }
 
   _isValid = (field = null) => {
@@ -86,20 +85,6 @@ class LoginContainer extends React.PureComponent {
 
   async setDataInStorage(resultData) {
 
-    await AsyncStorage.setItem(wordConstants.CONST_FCM_TOKEN, this.state.fcmToken);
-    await AsyncStorage.setItem(wordConstants.CONST_AUTH_TOKEN, resultData.auth_token);
-
-    const userData = resultData.result;
-    let arrayTemp = [];
-    arrayTemp.push(userData);
-
-    await AsyncStorage.setItem(wordConstants.CONST_USER_DATA, JSON.stringify(arrayTemp))
-      .then(() => {
-
-      })
-      .catch(() => {
-
-      })
   }
 
   /**
@@ -133,25 +118,6 @@ class LoginContainer extends React.PureComponent {
 
           this.setDataInStorage(resData);
           
-          if (resData.result) {
-
-            let isApprove = resData.result.is_approve
-
-            if (isApprove.toUpperCase() === wordConstants.CONST_APPROVE) {
-
-              // Here needs to check category if category selected then user will move to Dashboard 
-
-              if (resData.result.first_visit_flg>0) {
-                this.props.navigation.navigate('tabNavigator', { auth_token: resData.auth_token, arrayCategory: [] });
-              }else{
-                this.props.navigation.navigate('CategorySelection', { auth_token: resData.auth_token, userData: resData.result });
-              }
-            } else {
-              this.props.navigation.navigate('LoginProgress', { status: wordConstants.CONST_FAILED, userData: resData.result });
-            }
-          } else {
-            this.props.navigation.navigate('LoginProgress', { status: wordConstants.CONST_CHECKING, userData: {} });
-          }
         } else {
           if (resData.message) {
             {
@@ -165,39 +131,39 @@ class LoginContainer extends React.PureComponent {
     }
   };
 
-  async getToken() {
-    const fcmToken = await firebase.messaging().getToken();
+  // async getToken() {
+  //   const fcmToken = await firebase.messaging().getToken();
 
-    if (fcmToken) {
+  //   if (fcmToken) {
 
-      this.setState({ fcmToken: fcmToken });
-    } else {
+  //     this.setState({ fcmToken: fcmToken });
+  //   } else {
 
-    }
+  //   }
 
-  }
+  // }
 
-  async requestPermission() {
-    firebase.messaging().requestPermission()
-      .then(() => {
-        this.getToken();
-      })
-      .catch(error => { });
-  }
+  // async requestPermission() {
+  //   firebase.messaging().requestPermission()
+  //     .then(() => {
+  //       this.getToken();
+  //     })
+  //     .catch(error => { });
+  // }
 
-  async checkPermission() {
+  // async checkPermission() {
 
-    firebase.messaging().hasPermission()
-      .then(enabled => {
+  //   firebase.messaging().hasPermission()
+  //     .then(enabled => {
 
-        if (enabled) {
+  //       if (enabled) {
 
-          this.getToken();
-        } else {
-          this.requestPermission();
-        }
-      });
-  }
+  //         this.getToken();
+  //       } else {
+  //         this.requestPermission();
+  //       }
+  //     });
+  // }
 
   render() {
     const { data, errors, fetching, onSuccess } = this.state;

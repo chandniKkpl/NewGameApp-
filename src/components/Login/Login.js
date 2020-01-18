@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image, Text, FlatList, TextInput, ActivityIndicator } from 'react-native';
-import loginConstants from '../constants/Login';
-import commonStyles from '../stylesheet/common/commonStyles.style'
+import loginConstants from '../../constants/Login';
+import commonStyles from '../../stylesheet/common/commonStyles.style'
 import { SafeAreaView } from 'react-navigation';
-import { checkError } from '../utils'
+import { checkError } from '../../utils'
 import * as Animatable from 'react-native-animatable';
 import { ScaledSheet, verticalScale, moderateScale } from 'react-native-size-matters';
-import HeaderLoginModule from '../commonComponent/HeaderLoginModule';
+import HeaderLoginModule from '../common/HeaderLoginModule';
 
 export default class Login extends Component {
     constructor(props) {
@@ -30,19 +30,6 @@ export default class Login extends Component {
         if (item.index === 0) {
             viewRow = <View>
                 <HeaderLoginModule title={item.item} navigation={this.props.navigation} />
-
-                {/* <View style={[{ alignItems: 'center', alignSelf: 'center', height: 40, flexDirection: 'row' }]}>
-                    <TouchableOpacity style={Platform.OS === 'ios' ? styles.buttonTopIos : styles.buttonTopAndroid} onPress={() => this.props.navigation.goBack()} >
-                        <Image source={require('../../assets/cross1x.png')} style={{ width: 13, height: 13 }} />
-                    </TouchableOpacity>
-                    <Text style={[styles.textTitle, { alignSelf: 'center', flex: 6, textAlign: 'center' }]}>{item.item}</Text>
-                    <View style={Platform.OS === 'ios' ? styles.rightButton : { flex: 2 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                            <Text style={{ color: '#d61515', fontSize: 17 }}>{loginConstants.CLOSE}</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.singleLine} /> */}
             </View>
 
         } else if (item.index === 1 || item.index === 2) {
@@ -66,10 +53,10 @@ export default class Login extends Component {
                                 autoCapitalize='none'
                             />
                             {formData[fieldName].length > 0 && !errors[fieldName] ?
-                                <Image style={[styles.tickImage]} source={require('../../assets/tick1X.png')} />
+                                <Image style={[styles.tickImage]} source={require('../../../assets/tick1X.png')} />
                                 : null
                             }
-                             {errors[fieldName] ?  <Image source={require('../../assets/error.png')} style={{ width: 20, height: 20, tintColor: '#d61515' }} /> 
+                             {errors[fieldName] ?  <Image source={require('../../../assets/tick1X.png')} style={{ width: 20, height: 20, tintColor: '#d61515' }} /> 
                             : null
                         }
 
@@ -121,7 +108,7 @@ export default class Login extends Component {
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
                     <FlatList
-                    scrollEnabled={false}
+                        scrollEnabled={false}
                         style={{ flex: 1 }}
                         data={this.arrayData}
                         renderItem={this.renderItem}
