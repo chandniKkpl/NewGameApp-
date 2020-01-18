@@ -4,6 +4,8 @@ const loginConstants = {
    CLOSE:'Close',
    EMAIL_ADDRESS:'Email address',
    PASSWORD:'Password',
+   GUEST:'Login as Guest',
+   OR:'OR',
    LOGIN_BUTTON_TITLE: 'Login',
    LOGIN_BOTTOM_DESCRIPTION:'with the email address and password jused for new registration',
    FORGOT_PASSWORD_DESCRIPTION:'Did you forgot your password',

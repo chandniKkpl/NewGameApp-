@@ -11,7 +11,8 @@ export default{
         borderRadius: 5,
         height: 45,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin:10
     },
     buttonViewRed: {
         width: '80%',

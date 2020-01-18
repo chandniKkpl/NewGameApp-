@@ -8,6 +8,7 @@ const signupConstants = {
   FIRST_KANA_NAME:'First_kana', 
   EMAIL_ADDRESS: "Email address",
   PASSWORD: "Password",
+  SIGN_UP:"SignUp",
   PHYSICIAN_QUALIFICATION: "Physician national qualification",
   CERTIFICATE_DESC: "Certificate with face photo for identity verification",
   LICENCE_PASSPORT:'(License/Passport etc.)',

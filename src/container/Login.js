@@ -64,14 +64,6 @@ class LoginContainer extends React.PureComponent {
   _handleChange = (name, value) => {
     const { data } = this.state;
     
-    // if (name === 'email') {
-    //   if(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(value)){
-    //     data[name] = value;
-    //   }else{
-    //     return;
-    //   }
-    // }
-
     data[name] = value;
     this.setState(
       {
